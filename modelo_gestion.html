@@ -1,0 +1,647 @@
+﻿<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Renova Digital - Modelo de Gestión</title><link rel="stylesheet" href="assets/css/demo.css"><style>:root{--green-900:#0d3b12;--green-800:#1b5e20;--green-700:#2e7d32;--green-600:#388e3c;--green-100:#e8f3ea;--green-50:#f1f8f2;--bg:#f4f6f5;--white:#fff;--text:#1f2933;--muted:#6b7280;--border:#d9e2ec;--danger:#b42318;--info:#175cd3;--shadow:0 4px 14px rgba(13,59,18,.08);} .card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;box-shadow:var(--shadow)} .btn{display:inline-block;background:var(--green-800);color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:600;transition:.15s} .btn:hover{background:var(--green-700)} .btn-secondary,.secondary{background:#52606d!important;color:#fff} .btn-sm{padding:6px 10px;font-size:.9rem} .muted{color:var(--muted)} /* Modelo de Gestión - Renova Digital */
+.mg-page{display:flex;flex-direction:column;gap:16px}
+.mg-hero{display:flex;justify-content:space-between;gap:20px;align-items:center;background:linear-gradient(135deg,#0b3d26 0%,#1b5e20 55%,#236b2a 100%);color:#fff;border:none}
+.mg-eyebrow{margin:0 0 6px;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:#cfe8d2;font-weight:700}
+.mg-hero h1{margin:0 0 8px;font-size:2rem;color:#fff}.mg-lead{margin:0;max-width:760px;color:#e7f3e8}
+.mg-hero-stats{display:flex;gap:10px;flex-wrap:wrap}.mg-stat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:12px 16px;min-width:110px;text-align:center}
+.mg-stat strong{display:block;font-size:1.6rem;line-height:1}.mg-stat span{font-size:.82rem;color:#dcefe0}
+.mg-hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.mg-tag{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);color:#eaf5ec;padding:4px 10px;border-radius:999px;font-size:.78rem;font-weight:600}
+.mg-intro h2,.mg-flow-general h2,.mg-map-head h2,.mg-summary h2{margin:0 0 8px;color:var(--green-900)}
+.mg-intro-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:start}.mg-intro p{margin:0;color:#4b5563}
+.mg-intro-pillars{display:grid;gap:10px}.mg-pillar{border:1px solid var(--border);border-radius:10px;padding:12px;background:#fbfdfb}.mg-pillar strong{display:block;color:var(--green-900);font-size:.92rem;margin-bottom:2px}.mg-pillar span{color:var(--muted);font-size:.87rem}
+.mg-flow-strip{display:flex;gap:8px;align-items:stretch;overflow-x:auto;padding:6px 0 2px}
+.mg-flow-step{min-width:150px;flex:1 0 150px;border:1px solid #cfe0d3;border-radius:12px;padding:10px;background:#f7fbf8;position:relative;appearance:none;text-align:left;font:inherit;cursor:pointer;transition:.18s}.mg-flow-step:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(16,24,40,.08);border-color:#97b8a0}.mg-flow-step:focus{outline:2px solid rgba(27,94,32,.25);outline-offset:1px}
+.mg-flow-step-final{background:#edf7ef;border-color:#9cc5a4}
+.mg-flow-n{display:inline-flex;width:24px;height:24px;border-radius:999px;align-items:center;justify-content:center;background:var(--green-800);color:#fff;font-size:.75rem;font-weight:700;margin-bottom:6px}
+.mg-flow-step strong{display:block;font-size:.88rem;color:#183022;line-height:1.3;margin-bottom:2px}.mg-flow-step small{color:var(--muted);font-size:.78rem;line-height:1.3}
+.mg-flow-arrow{display:flex;align-items:center;justify-content:center;color:#5a8b63;font-size:1.3rem;font-weight:700;flex:0 0 16px}
+.mg-map-head{margin-bottom:14px}.mg-map-head p{margin:0}
+.mg-controls{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.mg-controls-left{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.mg-hint{font-size:.9rem}
+.mg-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.9rem;color:var(--muted)}.dot{width:12px;height:12px;border-radius:3px;display:inline-block;margin-right:6px;vertical-align:middle}
+.dot.gov{background:#1849a9}.dot.val{background:#1b5e20}.dot.sup{background:#b54708}
+.mg-map{padding:18px}
+.mg-context-row{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:stretch;margin-bottom:16px}
+.mg-context{display:flex;gap:10px;align-items:center;border:1px solid var(--border);border-radius:12px;padding:12px;background:#f8fbf8}
+.mg-context-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--green-100);font-size:1.2rem}
+.mg-context strong{display:block;font-size:.95rem;color:var(--green-900)}.mg-context small{color:var(--muted);font-size:.82rem}
+.mg-context-arrow{display:flex;align-items:center;justify-content:center;color:var(--green-700);font-size:1.5rem;font-weight:700}
+.mg-band{border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:10px}
+.mg-band-header{padding:14px 16px;border-bottom:1px solid var(--border)}.mg-band-header p{margin:6px 0 8px;color:var(--muted);font-size:.92rem}.mg-macro-btn{margin-top:2px}
+.mg-band-toggle{width:100%;background:none;border:none;padding:0;margin:0;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;color:inherit;font:inherit}
+.mg-band-title{font-size:1.1rem;font-weight:700;color:var(--green-900);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.mg-band-badge{font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;padding:4px 8px;border-radius:999px;font-weight:700}
+.mg-chevron{font-size:1.1rem;color:var(--muted);transition:transform .2s}
+.mg-band.collapsed .mg-chevron{transform:rotate(-90deg)}.mg-band.collapsed .mg-band-body{display:none}.mg-band.collapsed .mg-band-header{border-bottom:none}
+.mg-band-body{padding:14px}
+.mg-gov{border-color:#bfd0ff}.mg-gov .mg-band-header{background:#f3f7ff}.mg-gov .mg-band-badge{background:#dce8ff;color:#1849a9}
+.mg-val{border-color:#bcdcc6}.mg-val .mg-band-header{background:#f2f9f4}.mg-val .mg-band-badge{background:#dcefe2;color:#1b5e20}
+.mg-sup{border-color:#f0d0b4}.mg-sup .mg-band-header{background:#fff8f1}.mg-sup .mg-band-badge{background:#fde8d2;color:#b54708}
+.mg-grid{display:grid;gap:10px}.mg-grid-5{grid-template-columns:repeat(5,1fr)}.mg-grid-4{grid-template-columns:repeat(4,1fr)}
+.mg-proc{appearance:none;width:100%;text-align:left;background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;cursor:pointer;transition:.18s;display:flex;flex-direction:column;gap:4px;min-height:108px}
+.mg-proc:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(16,24,40,.08);border-color:#97b8a0}
+.mg-proc:focus{outline:2px solid rgba(27,94,32,.25);outline-offset:1px}
+.mg-proc strong{font-size:.95rem;color:#183022;line-height:1.3}.mg-proc span:last-child{font-size:.82rem;color:var(--muted);line-height:1.35}
+.mg-code{display:inline-flex;align-items:center;justify-content:center;width:fit-content;min-width:34px;padding:2px 8px;border-radius:7px;font-size:.74rem;font-weight:700;color:#fff}
+.mg-code.gov{background:#1849a9}.mg-code.val{background:#1b5e20}.mg-code.sup{background:#b54708}
+.mg-value-chain{display:flex;gap:8px;align-items:stretch;overflow-x:auto;padding-bottom:4px}
+.mg-proc-chain{min-width:170px;max-width:210px;flex:1 0 170px}
+.mg-chain-arrow{display:flex;align-items:center;justify-content:center;color:#5a8b63;font-size:1.5rem;font-weight:700;flex:0 0 18px}
+.mg-flow-link{text-align:center;color:var(--muted);font-size:.85rem;padding:2px 0 10px}.mg-flow-link i{display:block;font-style:normal;font-size:1.1rem;color:#6b8f74}
+.mg-feedback{margin-top:12px;padding:10px 12px;border-radius:10px;background:#edf7ef;border:1px dashed #9cc5a4;color:#1b5e20;font-size:.88rem;font-weight:600}
+.mg-summary h2{margin:0 0 12px;color:var(--green-900)}.mg-rel-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.mg-rel{padding:12px;border:1px solid var(--border);border-radius:12px;background:#fbfdfb}.mg-rel strong{display:block;color:var(--green-900);margin-bottom:4px;font-size:.93rem}.mg-rel p{margin:0;color:var(--muted);font-size:.88rem}
+/* Modal */
+.mg-modal{position:fixed;inset:0;display:none;z-index:100}.mg-modal.open{display:block}
+.mg-modal-backdrop{position:absolute;inset:0;background:rgba(17,24,39,.45)}
+.mg-modal-dialog{position:relative;width:min(920px,calc(100vw - 24px));margin:3vh auto;max-height:94vh;overflow:auto;background:#fff;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.2);border:1px solid var(--border)}
+.mg-modal-head{display:flex;justify-content:space-between;gap:12px;padding:18px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:#fff;z-index:1}
+.mg-modal-macro{margin:0 0 4px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--green-700)}
+.mg-modal-head h2{margin:0;color:var(--green-900);font-size:1.45rem}
+.mg-close{border:none;background:#f3f4f6;width:36px;height:36px;border-radius:10px;font-size:1.5rem;line-height:1;cursor:pointer;color:#374151}.mg-close:hover{background:#e5e7eb}
+.mg-modal-body{padding:18px 20px 22px}
+.mg-detail-desc{margin:0 0 14px;color:#374151}
+.mg-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mg-detail-box{border:1px solid var(--border);border-radius:12px;padding:14px;background:#fbfdfb}
+.mg-detail-box h3{margin:0 0 8px;font-size:.95rem;color:var(--green-900)}.mg-detail-box p{margin:0;color:#4b5563;font-size:.9rem}
+.mg-detail-box ul{margin:0;padding-left:18px;color:#4b5563;font-size:.9rem}.mg-detail-box li{margin:4px 0}
+.mg-detail-wide{grid-column:1/-1}
+.mg-kpis{display:flex;flex-wrap:wrap;gap:8px}.mg-kpi{background:var(--green-100);color:var(--green-900);padding:6px 10px;border-radius:999px;font-size:.82rem;font-weight:600}
+.mg-related{display:flex;flex-wrap:wrap;gap:8px}.mg-rel-btn{border:1px solid #bfd7c4;background:#fff;color:var(--green-900);padding:7px 10px;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600}
+.mg-rel-btn:hover{background:var(--green-50)}
+@media(max-width:1100px){.mg-grid-5{grid-template-columns:repeat(3,1fr)}.mg-grid-4{grid-template-columns:repeat(2,1fr)}.mg-rel-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:860px){.mg-hero{flex-direction:column;align-items:flex-start}.mg-intro-grid{grid-template-columns:1fr}.mg-context-row{grid-template-columns:1fr;}.mg-context-arrow{transform:rotate(90deg);font-size:1.2rem}.mg-detail-grid{grid-template-columns:1fr}.mg-detail-wide{grid-column:auto}}
+@media(max-width:640px){.mg-grid-5,.mg-grid-4,.mg-rel-grid{grid-template-columns:1fr}.mg-hero h1{font-size:1.6rem}.mg-modal-dialog{width:calc(100vw - 12px);margin:6px auto;max-height:calc(100vh - 12px)}.mg-modal-head,.mg-modal-body{padding:14px}.mg-proc-chain{min-width:160px}}
+@media print{.sidebar,.topbar,.mg-controls,.mg-modal{display:none!important}.mg-page{gap:10px}.card{box-shadow:none}}
+
+
+ .mg-page{gap:16px}</style></head>
+<body><div class="app"><aside class="sidebar"><div class="brand"><div class="logo">RD</div><h1>Renova Digital<small>Sistema de gestión</small></h1></div><nav class="nav">
+<a href="index.html">Panel principal</a><a href="modelo_gestion.html" class="active">Modelo de Gestión</a>
+<div class="group">Comercial</div><a href="clientes.html">Clientes</a><a href="prospectos.html">Prospectos</a><a href="seguimiento.html">Seguimiento</a><a href="atencion.html">Atención al cliente</a>
+<div class="group">Operación</div><a href="productos.html">Productos</a><a href="inventario.html">Inventario</a><a href="proveedores.html">Proveedores</a><a href="compras.html">Compras</a><a href="ventas.html">Ventas</a>
+<div class="group">Administración</div><a href="finanzas.html">Finanzas</a><a href="reportes.html">Reportes</a>
+</nav></aside><main class="main"><header class="topbar"><div class="topbar-left"><button class="menu-btn" id="menuBtn">≡</button><div><h2>Modelo de Gestión</h2><p>Procesos de gobierno, valor y apoyo de Renova Digital</p></div></div><div class="topbar-right"><div class="user">Admin · Prueba</div></div></header><section class="content">
+<div class="mg-page">
+  <section class="mg-hero card">
+    <div>
+      <p class="mg-eyebrow">Renova Digital · Sistema de gestión empresarial</p>
+      <h1>Modelo de Gestión</h1>
+      <p class="mg-lead">Representa la estructura de funcionamiento de Renova Digital para la compra, recepción, diagnóstico, reacondicionamiento, control de calidad, almacenamiento, comercialización, entrega y posventa de celulares, laptops y tablets reacondicionadas.</p>
+      <div class="mg-hero-tags">
+        <span class="mg-tag">Gobierno</span><span class="mg-tag">Cadena de valor</span><span class="mg-tag">Apoyo transversal</span><span class="mg-tag">Mejora continua</span>
+      </div>
+    </div>
+    <div class="mg-hero-stats">
+      <div class="mg-stat"><strong>3</strong><span>Macroprocesos</span></div>
+      <div class="mg-stat"><strong>22</strong><span>Procesos</span></div>
+      <div class="mg-stat"><strong>9</strong><span>Etapas de valor</span></div>
+    </div>
+  </section>
+
+  <section class="card mg-intro">
+    <div class="mg-intro-grid">
+      <div>
+        <h2>Propósito del modelo</h2>
+        <p>Este modelo de gestión define cómo Renova Digital organiza sus decisiones estratégicas, ejecuta la cadena de valor del reacondicionamiento tecnológico y asegura los recursos de apoyo necesarios para ofrecer dispositivos confiables, accesibles y con trazabilidad.</p>
+      </div>
+      <div class="mg-intro-pillars">
+        <div class="mg-pillar"><strong>Misión operativa</strong><span>Comercializar tecnología reacondicionada confiable con información transparente y atención segura.</span></div>
+        <div class="mg-pillar"><strong>Propuesta de valor</strong><span>Precios accesibles, revisión técnica, garantía, trazabilidad por serie y experiencia de compra confiable.</span></div>
+        <div class="mg-pillar"><strong>Enfoque</strong><span>Calidad, trazabilidad, control de datos y mejora continua basada en resultados y retroalimentación.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card mg-flow-general">
+    <h2>Flujo general de funcionamiento</h2>
+    <p class="muted">Secuencia adaptada a la operación real de Renova Digital, desde la dirección hasta la retroalimentación para la mejora continua.</p>
+    <div class="mg-flow-strip" aria-label="Flujo general">
+      <button type="button" class="mg-flow-step" data-jump="g1"><span class="mg-flow-n">1</span><strong>Dirección y planificación</strong><small>Objetivos, políticas y metas</small></button>
+      <div class="mg-flow-arrow">→</div>
+      <button type="button" class="mg-flow-step" data-jump="v1"><span class="mg-flow-n">2</span><strong>Recursos y proveedores</strong><small>Abastecimiento y capacidades</small></button>
+      <div class="mg-flow-arrow">→</div>
+      <button type="button" class="mg-flow-step" data-jump="v2"><span class="mg-flow-n">3</span><strong>Recepción de dispositivos</strong><small>Ingreso y registro por serie</small></button>
+      <div class="mg-flow-arrow">→</div>
+      <button type="button" class="mg-flow-step" data-jump="v3"><span class="mg-flow-n">4</span><strong>Evaluación y reacondicionamiento</strong><small>Diagnóstico, reparación y borrado seguro</small></button>
+      <div class="mg-flow-arrow">→</div>
+      <button type="button" class="mg-flow-step" data-jump="v4"><span class="mg-flow-n">5</span><strong>Control de calidad</strong><small>Pruebas y aprobación</small></button>
+      <div class="mg-flow-arrow">→</div>
+      <button type="button" class="mg-flow-step" data-jump="v5"><span class="mg-flow-n">6</span><strong>Inventario</strong><small>Stock disponible y trazable</small></button>
+      <div class="mg-flow-arrow">→</div>
+      <button type="button" class="mg-flow-step" data-jump="v6"><span class="mg-flow-n">7</span><strong>Comercialización</strong><small>Consulta, cotización y venta</small></button>
+      <div class="mg-flow-arrow">→</div>
+      <button type="button" class="mg-flow-step" data-jump="v7"><span class="mg-flow-n">8</span><strong>Entrega</strong><small>Despacho y confirmación</small></button>
+      <div class="mg-flow-arrow">→</div>
+      <button type="button" class="mg-flow-step" data-jump="v8"><span class="mg-flow-n">9</span><strong>Atención posventa</strong><small>Garantía, soporte y satisfacción</small></button>
+      <div class="mg-flow-arrow">→</div>
+      <button type="button" class="mg-flow-step mg-flow-step-final" data-jump="g5"><span class="mg-flow-n">10</span><strong>Retroalimentación y mejora continua</strong><small>Ajustes a procesos y decisiones</small></button>
+    </div>
+  </section>
+
+  <section class="card mg-controls">
+    <div class="mg-controls-left">
+      <button class="btn btn-primary btn-sm" data-mg-expand="all">Expandir todo</button>
+      <button class="btn btn-secondary btn-sm" data-mg-expand="none">Contraer macroprocesos</button>
+      <span class="muted mg-hint">Haz clic en cualquier proceso para abrir su ficha completa.</span>
+    </div>
+    <div class="mg-legend">
+      <span><i class="dot gov"></i>Gobierno: dirección y control</span>
+      <span><i class="dot val"></i>Valor: cadena operativa y comercial</span>
+      <span><i class="dot sup"></i>Apoyo: recursos transversales</span>
+    </div>
+  </section>
+
+  <section class="mg-map card" aria-label="Mapa de procesos de Renova Digital">
+    <div class="mg-map-head">
+      <h2>Mapa de procesos empresariales</h2>
+      <p class="muted">Los tres macroprocesos están conectados: el gobierno orienta, la cadena de valor genera el resultado para el cliente y los procesos de apoyo habilitan toda la operación.</p>
+    </div>
+
+    <div class="mg-context-row">
+      <div class="mg-context client"><span class="mg-context-icon" aria-hidden="true">👥</span><div><strong>Necesidades del cliente</strong><small>Busca tecnología funcional, accesible, confiable y con respaldo</small></div></div>
+      <div class="mg-context-arrow" aria-hidden="true">→</div>
+      <div class="mg-context org"><span class="mg-context-icon" aria-hidden="true">🏢</span><div><strong>Renova Digital</strong><small>Dirige, reacondiciona, comercializa y soporta dispositivos tecnológicos</small></div></div>
+      <div class="mg-context-arrow" aria-hidden="true">→</div>
+      <div class="mg-context value"><span class="mg-context-icon" aria-hidden="true">✔</span><div><strong>Valor entregado</strong><small>Equipo reacondicionado, probado, trazable y con atención posventa</small></div></div>
+    </div>
+
+    <!-- GOBIERNO -->
+    <div class="mg-band mg-gov" data-band="gobierno">
+      <div class="mg-band-header">
+        <button class="mg-band-toggle" data-toggle-band="gobierno" aria-expanded="true"><span class="mg-band-title"><span class="mg-band-badge">Nivel superior</span>Procesos de Gobierno</span><span class="mg-chevron">▾</span></button>
+        <p>Definen el rumbo estratégico, establecen políticas, controlan resultados y promueven la mejora continua.</p><button type="button" class="btn btn-sm btn-secondary mg-macro-btn" data-macro="gobierno">Ver detalle del macroproceso</button>
+      </div>
+      <div class="mg-band-body" id="band-gobierno">
+        <div class="mg-grid mg-grid-5">
+          <button class="mg-proc" data-process="g1"><span class="mg-code gov">G1</span><strong>Dirección y planificación estratégica</strong><span>Rumbo, metas y prioridades</span></button>
+          <button class="mg-proc" data-process="g2"><span class="mg-code gov">G2</span><strong>Gestión estratégica del negocio</strong><span>Mercado, rentabilidad y decisiones</span></button>
+          <button class="mg-proc" data-process="g3"><span class="mg-code gov">G3</span><strong>Gestión de calidad y riesgos</strong><span>Estándares, prevención y cumplimiento</span></button>
+          <button class="mg-proc" data-process="g4"><span class="mg-code gov">G4</span><strong>Control de gestión y resultados</strong><span>Indicadores, seguimiento y corrección</span></button>
+          <button class="mg-proc" data-process="g5"><span class="mg-code gov">G5</span><strong>Innovación y mejora continua</strong><span>Mejoras, digitalización y eficiencia operativa</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mg-flow-link"><span>Orientación, políticas, objetivos y control</span><i aria-hidden="true">↓</i></div>
+
+    <!-- VALOR -->
+    <div class="mg-band mg-val" data-band="valor">
+      <div class="mg-band-header">
+        <button class="mg-band-toggle" data-toggle-band="valor" aria-expanded="true"><span class="mg-band-title"><span class="mg-band-badge">Nivel central</span>Procesos Agregadores de Valor</span><span class="mg-chevron">▾</span></button>
+        <p>Cadena principal que transforma dispositivos adquiridos en productos reacondicionados, comercializados y respaldados.</p><button type="button" class="btn btn-sm btn-secondary mg-macro-btn" data-macro="valor">Ver detalle del macroproceso</button>
+      </div>
+      <div class="mg-band-body" id="band-valor">
+        <div class="mg-value-chain" role="list">
+          <button class="mg-proc mg-proc-chain" data-process="v1" role="listitem"><span class="mg-code val">V1</span><strong>Abastecimiento y adquisición</strong><span>Proveedores, compra y selección</span></button>
+          <div class="mg-chain-arrow" aria-hidden="true">→</div>
+          <button class="mg-proc mg-proc-chain" data-process="v2" role="listitem"><span class="mg-code val">V2</span><strong>Recepción y diagnóstico técnico</strong><span>Registro, revisión y clasificación</span></button>
+          <div class="mg-chain-arrow" aria-hidden="true">→</div>
+          <button class="mg-proc mg-proc-chain" data-process="v3" role="listitem"><span class="mg-code val">V3</span><strong>Reacondicionamiento y preparación</strong><span>Reparación, limpieza y configuración</span></button>
+          <div class="mg-chain-arrow" aria-hidden="true">→</div>
+          <button class="mg-proc mg-proc-chain" data-process="v4" role="listitem"><span class="mg-code val">V4</span><strong>Control de calidad</strong><span>Pruebas finales y aprobación</span></button>
+          <div class="mg-chain-arrow" aria-hidden="true">→</div>
+          <button class="mg-proc mg-proc-chain" data-process="v5" role="listitem"><span class="mg-code val">V5</span><strong>Inventario y almacenamiento</strong><span>Stock por serie y estado</span></button>
+          <div class="mg-chain-arrow" aria-hidden="true">→</div>
+          <button class="mg-proc mg-proc-chain" data-process="v6" role="listitem"><span class="mg-code val">V6</span><strong>Marketing y ventas</strong><span>Catálogo, cotización y cierre</span></button>
+          <div class="mg-chain-arrow" aria-hidden="true">→</div>
+          <button class="mg-proc mg-proc-chain" data-process="v7" role="listitem"><span class="mg-code val">V7</span><strong>Pedido, entrega y distribución</strong><span>Preparación, despacho y trazabilidad</span></button>
+          <div class="mg-chain-arrow" aria-hidden="true">→</div>
+          <button class="mg-proc mg-proc-chain" data-process="v8" role="listitem"><span class="mg-code val">V8</span><strong>Atención y servicio posventa</strong><span>Garantías, soporte y fidelización</span></button>
+          <div class="mg-chain-arrow" aria-hidden="true">→</div>
+          <button class="mg-proc mg-proc-chain" data-process="v9" role="listitem"><span class="mg-code val">V9</span><strong>Bajas y recuperación de equipos</strong><span>Registro de bajas, reutilización y disposición</span></button>
+        </div>
+        <div class="mg-feedback"><span>↩ Retroalimentación del cliente y posventa → alimenta control de calidad, mejora continua y decisiones de gobierno.</span></div>
+      </div>
+    </div>
+
+    <div class="mg-flow-link"><span>Recursos, soporte, información y cumplimiento</span><i aria-hidden="true">↑</i></div>
+
+    <!-- APOYO -->
+    <div class="mg-band mg-sup" data-band="apoyo">
+      <div class="mg-band-header">
+        <button class="mg-band-toggle" data-toggle-band="apoyo" aria-expanded="true"><span class="mg-band-title"><span class="mg-band-badge">Nivel inferior</span>Procesos Habilitantes o de Apoyo</span><span class="mg-chevron">▾</span></button>
+        <p>Proporcionan capacidades transversales para que la dirección y la cadena de valor operen con eficiencia y control.</p><button type="button" class="btn btn-sm btn-secondary mg-macro-btn" data-macro="apoyo">Ver detalle del macroproceso</button>
+      </div>
+      <div class="mg-band-body" id="band-apoyo">
+        <div class="mg-grid mg-grid-4">
+          <button class="mg-proc" data-process="a1"><span class="mg-code sup">A1</span><strong>Gestión administrativa y documental</strong><span>Registros, soportes y archivo</span></button>
+          <button class="mg-proc" data-process="a2"><span class="mg-code sup">A2</span><strong>Gestión financiera y contable</strong><span>Ingresos, egresos, costos y rentabilidad</span></button>
+          <button class="mg-proc" data-process="a3"><span class="mg-code sup">A3</span><strong>Gestión del talento humano</strong><span>Roles, capacitación y desempeño</span></button>
+          <button class="mg-proc" data-process="a4"><span class="mg-code sup">A4</span><strong>Gestión tecnológica y sistemas</strong><span>Web, CRM, ERP, datos y respaldos</span></button>
+          <button class="mg-proc" data-process="a5"><span class="mg-code sup">A5</span><strong>Infraestructura y recursos físicos</strong><span>Herramientas, espacio y equipos</span></button>
+          <button class="mg-proc" data-process="a6"><span class="mg-code sup">A6</span><strong>Gestión logística y soporte operativo</strong><span>Recepción, embalaje y coordinación</span></button>
+          <button class="mg-proc" data-process="a7"><span class="mg-code sup">A7</span><strong>Gestión legal y cumplimiento</strong><span>Garantías, consumidor, tributario y datos</span></button>
+          <button class="mg-proc" data-process="a8"><span class="mg-code sup">A8</span><strong>Seguridad y gestión de información</strong><span>Accesos, protección y borrado seguro</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card mg-summary">
+    <h2>Relación entre macroprocesos</h2>
+    <div class="mg-rel-grid">
+      <div class="mg-rel"><strong>Gobierno → Valor</strong><p>Define objetivos, políticas de calidad, criterios de compra, precios, metas comerciales y lineamientos de garantía para la cadena de reacondicionamiento y venta.</p></div>
+      <div class="mg-rel"><strong>Gobierno → Apoyo</strong><p>Asigna recursos, establece responsabilidades, controla riesgos y exige cumplimiento administrativo, financiero, legal y tecnológico.</p></div>
+      <div class="mg-rel"><strong>Apoyo → Valor</strong><p>Proporciona personal capacitado, tecnología CRM/ERP, financiamiento, infraestructura, logística, seguridad y cumplimiento normativo.</p></div>
+      <div class="mg-rel"><strong>Valor → Gobierno</strong><p>Retroalimenta con resultados de ventas, costos, tiempos, calidad, reclamos, garantías y satisfacción del cliente para ajustar decisiones y mejorar.</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- Modal ficha -->
+<div class="mg-modal" id="mgModal" aria-hidden="true">
+  <div class="mg-modal-backdrop" data-mg-close></div>
+  <div class="mg-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="mgModalTitle">
+    <div class="mg-modal-head">
+      <div>
+        <p class="mg-modal-macro" id="mgModalMacro"></p>
+        <h2 id="mgModalTitle"></h2>
+      </div>
+      <button class="mg-close" type="button" data-mg-close aria-label="Cerrar ficha">×</button>
+    </div>
+    <div class="mg-modal-body" id="mgModalBody"></div>
+  </div>
+</div>
+
+</section></main></div><script src="assets/js/demo.js"></script><script>(function () {
+  const processes = {
+    g1: {
+      macro: 'Procesos de Gobierno', code: 'G1', name: 'Dirección y planificación estratégica',
+      description: 'Define el rumbo de Renova Digital, establece prioridades y orienta las decisiones para el crecimiento sostenible del negocio de tecnología reacondicionada.',
+      objective: 'Establecer la misión, visión, objetivos y planes que guíen la operación y el crecimiento de Renova Digital.',
+      activities: ['Definir la misión, visión y objetivos de Renova Digital.', 'Establecer metas de crecimiento, ventas y posicionamiento.', 'Planificar actividades comerciales, operativas y financieras.', 'Definir prioridades de inversión en compra, reacondicionamiento y canales de venta.', 'Analizar oportunidades de expansión y nuevos canales.', 'Definir estrategias de diferenciación frente a competidores y equipos nuevos.'],
+      responsible: 'Dirección / Administrador general.',
+      inputs: ['Resultados de ventas y rentabilidad.', 'Análisis del mercado de tecnología reacondicionada.', 'Capacidad operativa y financiera.', 'Retroalimentación de clientes y áreas.'],
+      outputs: ['Plan estratégico y metas.', 'Presupuesto y prioridades.', 'Políticas generales y hoja de ruta.'],
+      kpis: ['% de cumplimiento de objetivos estratégicos', 'Crecimiento de ventas mensual/trimestral', 'Margen de rentabilidad', 'Nivel de cumplimiento del plan operativo'],
+      related: ['g2', 'g4', 'v6', 'a2'],
+      importance: 'Orienta todas las decisiones de la empresa y asegura que la compra, reacondicionamiento y venta de dispositivos se realicen con foco en rentabilidad, calidad y confianza del cliente.'
+    },
+    g2: {
+      macro: 'Procesos de Gobierno', code: 'G2', name: 'Gestión estratégica del negocio',
+      description: 'Analiza el entorno, el mercado y el desempeño general para tomar decisiones que fortalezcan la competitividad de Renova Digital.',
+      objective: 'Evaluar el desempeño del negocio y el mercado para tomar decisiones oportunas que mejoren rentabilidad y competitividad.',
+      activities: ['Evaluar el desempeño general de la empresa.', 'Analizar el mercado de celulares, laptops y tablets reacondicionadas.', 'Identificar tendencias de consumo y precios.', 'Evaluar oportunidades, amenazas y riesgos.', 'Tomar decisiones para mejorar rentabilidad y competitividad.', 'Definir políticas generales de funcionamiento comercial y operativo.'],
+      responsible: 'Dirección / Administrador general (con apoyo de responsable comercial y financiero).',
+      inputs: ['Reportes de ventas e inventario.', 'Información de proveedores y competencia.', 'Indicadores financieros y operativos.', 'Retroalimentación de clientes.'],
+      outputs: ['Decisiones estratégicas.', 'Ajustes de política comercial/precios.', 'Planes de acción por oportunidad o riesgo.'],
+      kpis: ['Rentabilidad por categoría de producto', 'Participación en canales de venta', 'Variación de costos de adquisición', 'Tasa de conversión comercial'],
+      related: ['g1', 'v1', 'v6', 'a2'],
+      importance: 'Permite adaptar la empresa a cambios en demanda, precios y disponibilidad de equipos, protegiendo el margen y la sostenibilidad del negocio.'
+    },
+    g3: {
+      macro: 'Procesos de Gobierno', code: 'G3', name: 'Gestión de calidad y riesgos',
+      description: 'Establece estándares de calidad, controles y medidas preventivas para asegurar productos confiables y operación segura.',
+      objective: 'Garantizar que los dispositivos reacondicionados cumplan estándares de calidad y que los riesgos operativos, comerciales y financieros se gestionen adecuadamente.',
+      activities: ['Definir estándares de calidad para dispositivos reacondicionados.', 'Establecer políticas de revisión, pruebas y aprobación.', 'Identificar riesgos comerciales, operativos, financieros y tecnológicos.', 'Definir medidas para prevenir pérdidas, fraudes o fallas.', 'Supervisar cumplimiento de garantías, devoluciones y protección al consumidor.', 'Verificar el borrado seguro de datos en equipos recibidos.'],
+      responsible: 'Dirección / Administrador general y técnico de reacondicionamiento.',
+      inputs: ['Resultados de diagnóstico y control de calidad.', 'Reclamos y garantías.', 'Reportes de inventario y finanzas.', 'Normativa aplicable y políticas internas.'],
+      outputs: ['Políticas de calidad y garantía.', 'Matriz de riesgos y controles.', 'Acciones preventivas/correctivas.'],
+      kpis: ['% de equipos aprobados en control de calidad', 'Tasa de devoluciones por falla', 'Tasa de reclamos de garantía', 'Número de incidentes/riesgos mitigados'],
+      related: ['v2', 'v3', 'v4', 'v8', 'a7', 'a8'],
+      importance: 'Protege la confianza del cliente y la reputación de Renova Digital, reduciendo devoluciones, pérdidas y riesgos legales.'
+    },
+    g4: {
+      macro: 'Procesos de Gobierno', code: 'G4', name: 'Control de gestión y evaluación de resultados',
+      description: 'Supervisa el cumplimiento de metas y el desempeño de las áreas mediante indicadores y acciones correctivas.',
+      objective: 'Medir, evaluar y corregir el desempeño de la empresa para asegurar el cumplimiento de los objetivos.',
+      activities: ['Supervisar el cumplimiento de objetivos y planes.', 'Evaluar ventas, rentabilidad y desempeño operativo.', 'Revisar indicadores de gestión por proceso.', 'Identificar desviaciones y causas.', 'Implementar acciones correctivas y de seguimiento.', 'Evaluar el cumplimiento de responsabilidades por área/cargo.'],
+      responsible: 'Dirección / Administrador general.',
+      inputs: ['Indicadores KPI.', 'Reportes del CRM/ERP.', 'Informes financieros y operativos.', 'Resultados de auditorías o revisiones internas.'],
+      outputs: ['Informes de gestión.', 'Planes correctivos.', 'Decisiones de ajuste operativo.'],
+      kpis: ['% de cumplimiento de KPIs', 'Desviación de presupuesto', 'Tiempo de cierre de acciones correctivas', 'Cumplimiento de metas por área'],
+      related: ['g1', 'g5', 'a2', 'v6'],
+      importance: 'Permite detectar problemas a tiempo (baja rotación, alta garantía, bajo recaudo) y tomar decisiones basadas en datos.'
+    },
+    g5: {
+      macro: 'Procesos de Gobierno', code: 'G5', name: 'Innovación y mejora continua',
+      description: 'Impulsa la modernización, la eficiencia y la mejora operativa en los procesos de Renova Digital.',
+      objective: 'Mejorar continuamente los procesos, servicios y herramientas de la empresa para aumentar valor y competitividad.',
+      activities: ['Evaluar nuevas oportunidades de negocio y servicios.', 'Implementar mejoras en procesos operativos y comerciales.', 'Aprovechar herramientas digitales (CRM, ERP, web, analítica).', 'Analizar necesidades y retroalimentación de clientes.', 'Promover la prolongación de la vida útil de los equipos reacondicionados.', 'Impulsar modernización y capacitación del equipo.'],
+      responsible: 'Dirección / Administrador general con apoyo de tecnología.',
+      inputs: ['Retroalimentación de clientes.', 'Resultados de KPIs.', 'Incidentes, reclamos y propuestas internas.', 'Tendencias tecnológicas.'],
+      outputs: ['Iniciativas de mejora implementadas.', 'Procesos actualizados.', 'Nuevas funcionalidades o prácticas.'],
+      kpis: ['Número de mejoras implementadas', 'Reducción de retrabajos', 'Reducción de tiempo de ciclo', 'Índice de satisfacción del cliente'],
+      related: ['g4', 'v3', 'v8', 'v9', 'a4'],
+      importance: 'Mantiene a Renova Digital competitiva, eficiente y alineada con las expectativas del cliente y la mejora continua.'
+    },
+
+    // VALOR
+    v1: {
+      macro: 'Procesos Agregadores de Valor', code: 'V1', name: 'Gestión de abastecimiento y adquisición de dispositivos',
+      description: 'Asegura el suministro de celulares, laptops y tablets con potencial de reacondicionamiento, a costos y condiciones adecuadas.',
+      objective: 'Adquirir dispositivos con buena relación costo/estado/demanda para alimentar el proceso de reacondicionamiento.',
+      activities: ['Identificar proveedores y fuentes de abastecimiento.', 'Buscar dispositivos usados, devueltos o lotes disponibles.', 'Evaluar proveedores, precios y condiciones.', 'Negociar compras según demanda y rentabilidad.', 'Seleccionar equipos por marca, modelo, estado y potencial de venta.', 'Registrar compras y acuerdos.'],
+      responsible: 'Responsable de compras y abastecimiento / Administrador general.',
+      inputs: ['Demanda y rotación de inventario.', 'Presupuesto disponible.', 'Catálogo de productos objetivo.', 'Evaluación de proveedores.'],
+      outputs: ['Órdenes/compras realizadas.', 'Dispositivos adquiridos para ingreso.', 'Información de costos y proveedor.'],
+      kpis: ['Costo promedio de adquisición', 'Cumplimiento de proveedor', 'Tiempo de abastecimiento', '% de unidades adquiridas aptas para reacondicionamiento'],
+      related: ['g2', 'v2', 'a2', 'a6'],
+      importance: 'Define la disponibilidad, el costo base y la rentabilidad de los productos que Renova Digital podrá vender.'
+    },
+    v2: {
+      macro: 'Procesos Agregadores de Valor', code: 'V2', name: 'Recepción y diagnóstico técnico',
+      description: 'Recibe, identifica y evalúa técnicamente cada dispositivo para determinar su viabilidad de reacondicionamiento.',
+      objective: 'Registrar y diagnosticar correctamente los equipos recibidos para definir acciones técnicas y comerciales.',
+      activities: ['Recibir dispositivos adquiridos.', 'Registrar equipo por marca, modelo, serial/IMEI y características.', 'Revisar estado físico y estético.', 'Evaluar funcionamiento de componentes clave.', 'Identificar daños, fallas o repuestos necesarios.', 'Clasificar como apto, reparable o no viable.'],
+      responsible: 'Técnico de reacondicionamiento / Responsable de inventario.',
+      inputs: ['Dispositivos adquiridos.', 'Orden de compra/proveedor.', 'Criterios de diagnóstico.'],
+      outputs: ['Ficha de diagnóstico por unidad.', 'Clasificación técnica inicial.', 'Unidades aptas para reacondicionamiento o descarte.'],
+      kpis: ['Tiempo promedio de diagnóstico', '% de unidades aptas para reacondicionamiento', '% de registros con serie/IMEI completo', 'Tasa de fallas detectadas en recepción'],
+      related: ['v1', 'v3', 'v5', 'g3'],
+      importance: 'Evita ingresar equipos inviables al proceso y asegura trazabilidad desde el primer contacto con el dispositivo.'
+    },
+    v3: {
+      macro: 'Procesos Agregadores de Valor', code: 'V3', name: 'Reacondicionamiento y preparación del producto',
+      description: 'Ejecuta las acciones técnicas necesarias para dejar el dispositivo funcional, seguro y presentable para su venta.',
+      objective: 'Restaurar la funcionalidad y presentación del dispositivo cumpliendo criterios técnicos y de seguridad.',
+      activities: ['Realizar limpieza física y mantenimiento.', 'Reparar o reemplazar componentes cuando sea viable.', 'Verificar batería, pantalla, conectividad, botones, cámaras y puertos.', 'Configurar el equipo y realizar pruebas básicas.', 'Ejecutar borrado seguro de datos anteriores.', 'Preparar el dispositivo para control de calidad y comercialización.'],
+      responsible: 'Técnico de reacondicionamiento.',
+      inputs: ['Diagnóstico técnico.', 'Repuestos/herramientas.', 'Procedimientos técnicos y de seguridad.'],
+      outputs: ['Dispositivo reacondicionado.', 'Registro de intervención técnica.', 'Equipo listo para control de calidad.'],
+      kpis: ['Tiempo promedio de reacondicionamiento', 'Costo de reacondicionamiento por unidad', 'Tasa de retrabajo técnico', '% de unidades con borrado seguro certificado'],
+      related: ['v2', 'v4', 'g3', 'a5', 'a8'],
+      importance: 'Es el proceso que transforma un equipo usado en un producto confiable listo para generar valor al cliente.'
+    },
+    v4: {
+      macro: 'Procesos Agregadores de Valor', code: 'V4', name: 'Control de calidad y certificación interna',
+      description: 'Verifica que cada equipo cumpla los estándares de Renova Digital antes de ser publicado o vendido.',
+      objective: 'Asegurar que solo dispositivos funcionales y conforme a criterios internos pasen a inventario comercial.',
+      activities: ['Realizar pruebas finales de funcionamiento.', 'Verificar estado físico, rendimiento y accesorios definidos.', 'Registrar resultados de pruebas por unidad.', 'Clasificar grado/estado comercial del dispositivo.', 'Aprobar, reprocesar o dar de baja el equipo.', 'Liberar unidad para inventario disponible.'],
+      responsible: 'Técnico de reacondicionamiento / Responsable de calidad (puede ser el mismo rol en emprendimiento).',
+      inputs: ['Equipo reacondicionado.', 'Checklist de calidad.', 'Criterios de grado y garantía.'],
+      outputs: ['Unidad aprobada/rechazada.', 'Registro de QA.', 'Estado comercial asignado.'],
+      kpis: ['% de unidades aprobadas en primera revisión', 'Tasa de retrabajo', 'Tasa de rechazo/baja', 'Incidencias de calidad postventa'],
+      related: ['v3', 'v5', 'g3', 'v8'],
+      importance: 'Reduce garantías y reclamos, protegiendo la promesa de confiabilidad de Renova Digital.'
+    },
+    v5: {
+      macro: 'Procesos Agregadores de Valor', code: 'V5', name: 'Gestión de inventario y almacenamiento comercial',
+      description: 'Controla stock, ubicación y estado de cada unidad reacondicionada para garantizar disponibilidad y trazabilidad.',
+      objective: 'Mantener inventario confiable por número de serie/IMEI, evitando pérdidas, duplicidades y ventas sin stock.',
+      activities: ['Registrar unidades aprobadas en inventario.', 'Controlar entradas, salidas, reservas y ventas.', 'Gestionar seriales/IMEI individuales.', 'Clasificar por categoría, marca, modelo, grado y estado.', 'Actualizar estados: disponible, reservado, vendido, en reparación, baja.', 'Realizar conteos y conciliaciones periódicas.'],
+      responsible: 'Responsable de inventario / Administrador.',
+      inputs: ['Unidades aprobadas por QA.', 'Ventas, reservas y devoluciones.', 'Reglas de estado y almacenamiento.'],
+      outputs: ['Inventario actualizado.', 'Disponibilidad real por unidad.', 'Alertas de stock y trazabilidad.'],
+      kpis: ['Exactitud de inventario', 'Rotación de inventario', 'Unidades disponibles por categoría', 'Días promedio de permanencia en stock'],
+      related: ['v4', 'v6', 'v7', 'a4', 'a6'],
+      importance: 'Permite vender con confianza, conocer qué se tiene realmente y responder rápido a clientes y reportes.'
+    },
+    v6: {
+      macro: 'Procesos Agregadores de Valor', code: 'V6', name: 'Marketing, comercialización y ventas',
+      description: 'Conecta la oferta de productos reacondicionados con la demanda del cliente y concreta ventas rentables.',
+      objective: 'Comercializar dispositivos reacondicionados de forma clara, atractiva y rentable, generando confianza en el cliente.',
+      activities: ['Analizar necesidades del cliente y demanda.', 'Mantener información clara de los productos disponibles.', 'Gestionar consultas, cotizaciones y oportunidades.', 'Formalizar ventas y registrar condiciones.', 'Dar seguimiento a clientes interesados.', 'Coordinar la venta según el canal disponible (presencial o contacto directo).'],
+      responsible: 'Responsable comercial / Atención al cliente / Administrador.',
+      inputs: ['Inventario disponible.', 'Precios y políticas comerciales.', 'Leads y consultas de clientes.'],
+      outputs: ['Cotizaciones y ventas.', 'Clientes registrados.', 'Información comercial para seguimiento.'],
+      kpis: ['Número de ventas mensuales', 'Tasa de conversión', 'Ticket promedio', 'Margen por venta'],
+      related: ['g2', 'v5', 'v7', 'v8', 'a2'],
+      importance: 'Genera ingresos y posiciona a Renova Digital como alternativa confiable frente a equipos nuevos.'
+    },
+    v7: {
+      macro: 'Procesos Agregadores de Valor', code: 'V7', name: 'Gestión de pedidos, entrega y distribución',
+      description: 'Asegura que el producto vendido llegue correctamente al cliente, con trazabilidad y confirmación de entrega.',
+      objective: 'Preparar, entregar y registrar pedidos de forma segura, oportuna y trazable.',
+      activities: ['Confirmar pedido y disponibilidad de la unidad.', 'Preparar y verificar el dispositivo antes del despacho.', 'Empacar adecuadamente el producto.', 'Coordinar entrega, envío o retiro.', 'Registrar entrega y evidencia.', 'Confirmar recepción del cliente.'],
+      responsible: 'Responsable logístico / Responsable comercial (según tamaño del emprendimiento).',
+      inputs: ['Venta confirmada.', 'Unidad reservada/disponible.', 'Datos de entrega del cliente.'],
+      outputs: ['Pedido entregado.', 'Registro de entrega.', 'Trazabilidad de salida.'],
+      kpis: ['% de pedidos entregados a tiempo', 'Incidencias de entrega', 'Tiempo de preparación de pedido', 'Tasa de entregas confirmadas'],
+      related: ['v5', 'v6', 'v8', 'a6'],
+      importance: 'Cierra la experiencia de compra; una entrega correcta refuerza la confianza y evita reclamos.'
+    },
+    v8: {
+      macro: 'Procesos Agregadores de Valor', code: 'V8', name: 'Atención al cliente y servicio posventa',
+      description: 'Atiende consultas, garantías y reclamos para resolver problemas y fidelizar clientes.',
+      objective: 'Brindar soporte oportuno antes y después de la venta, protegiendo la satisfacción y confianza del cliente.',
+      activities: ['Atender consultas pre y postventa.', 'Registrar y gestionar casos, reclamos y garantías.', 'Coordinar diagnóstico y solución de devoluciones.', 'Aplicar políticas de cambio, devolución o garantía.', 'Recopilar satisfacción y retroalimentación.', 'Mantener historial de atención por cliente.'],
+      responsible: 'Atención al cliente / Administrador (con apoyo técnico).',
+      inputs: ['Consultas y reclamos.', 'Historial de venta y unidad.', 'Políticas de garantía.'],
+      outputs: ['Casos resueltos.', 'Devoluciones/garantías gestionadas.', 'Retroalimentación para mejora.'],
+      kpis: ['Tiempo promedio de respuesta', 'Tiempo de resolución de casos', '% de reclamos resueltos', 'Satisfacción del cliente (CSAT)'],
+      related: ['v6', 'v7', 'g3', 'g5', 'v9'],
+      importance: 'Sostiene la confianza en productos reacondicionados y convierte problemas en oportunidades de fidelización.'
+    },
+    v9: {
+      macro: 'Procesos Agregadores de Valor', code: 'V9', name: 'Gestión de bajas y recuperación de equipos',
+      description: 'Gestiona los equipos que no pueden comercializarse, registrando bajas, aprovechando componentes viables y definiendo una disposición responsable.',
+      objective: 'Controlar adecuadamente los dispositivos no aptos para venta, reduciendo pérdidas y manteniendo trazabilidad de bajas y recuperaciones.',
+      activities: ['Identificar equipos no aptos para reacondicionamiento o venta.', 'Registrar la causa de baja o no viabilidad por unidad.', 'Aprovechar componentes útiles cuando sea técnicamente viable y seguro.', 'Separar equipos o piezas para disposición responsable.', 'Actualizar el estado del inventario y los registros internos.', 'Coordinar con compras/técnica la información para decisiones de reposición o descarte.'],
+      responsible: 'Técnico de reacondicionamiento / Responsable de inventario / Administrador general.',
+      inputs: ['Diagnósticos técnicos.', 'Unidades rechazadas o en baja.', 'Criterios de calidad y viabilidad.'],
+      outputs: ['Registro de bajas por unidad.', 'Componentes o equipos recuperados cuando aplique.', 'Disposición responsable documentada.'],
+      kpis: ['% de unidades dadas de baja con causa registrada', '% de equipos o componentes recuperados', 'Tiempo de resolución de unidades no viables', 'Pérdida asociada a equipos en baja'],
+      related: ['g5', 'v2', 'v3', 'v4', 'v5'],
+      importance: 'Permite a Renova Digital mantener control sobre equipos no vendibles, reducir pérdidas y conservar trazabilidad en el inventario.'
+    },
+
+    // APOYO
+    a1: {
+      macro: 'Procesos Habilitantes o de Apoyo', code: 'A1', name: 'Gestión administrativa y documental',
+      description: 'Organiza la documentación y soportes administrativos necesarios para la operación del negocio.',
+      objective: 'Garantizar orden, trazabilidad y disponibilidad de documentos comerciales, operativos y administrativos.',
+      activities: ['Organizar documentos de compras, ventas, garantías y proveedores.', 'Gestionar archivos y respaldos documentales.', 'Controlar contratos, acuerdos y procedimientos internos.', 'Mantener registros administrativos actualizados.', 'Apoyar la preparación de informes y soportes.'],
+      responsible: 'Responsable administrativo / Administrador general.',
+      inputs: ['Documentos de operación.', 'Registros del CRM/ERP.', 'Políticas internas.'],
+      outputs: ['Archivo organizado.', 'Soportes disponibles.', 'Control documental.'],
+      kpis: ['% de documentos completos por proceso', 'Tiempo de localización de soportes', 'Cumplimiento de registros administrativos'],
+      related: ['a2', 'a7', 'v1', 'v6'],
+      importance: 'Reduce errores, facilita auditorías internas y respalda decisiones comerciales y financieras.'
+    },
+    a2: {
+      macro: 'Procesos Habilitantes o de Apoyo', code: 'A2', name: 'Gestión financiera y contable',
+      description: 'Administra los recursos económicos, registra movimientos y controla la rentabilidad del negocio.',
+      objective: 'Asegurar control financiero, liquidez y rentabilidad en la operación de Renova Digital.',
+      activities: ['Registrar ingresos, egresos y pagos.', 'Gestionar cuentas por cobrar y por pagar.', 'Controlar caja y flujo de efectivo.', 'Calcular costos de adquisición y reacondicionamiento.', 'Analizar rentabilidad por producto/venta.', 'Elaborar reportes financieros.'],
+      responsible: 'Responsable financiero y administrativo / Administrador general.',
+      inputs: ['Ventas, compras, pagos y gastos.', 'Presupuesto.', 'Datos del ERP.'],
+      outputs: ['Reportes financieros.', 'Control de cartera y pagos.', 'Análisis de rentabilidad.'],
+      kpis: ['Margen de rentabilidad', 'Flujo de caja', '% de cartera vencida', 'Cumplimiento de pagos a proveedores'],
+      related: ['g1', 'g4', 'v1', 'v6', 'a1'],
+      importance: 'Permite saber si el negocio es rentable, mantener liquidez y tomar decisiones de precios y compras.'
+    },
+    a3: {
+      macro: 'Procesos Habilitantes o de Apoyo', code: 'A3', name: 'Gestión del talento humano',
+      description: 'Organiza, capacita y evalúa al personal para asegurar un desempeño adecuado en las áreas clave.',
+      objective: 'Contar con personas competentes y alineadas con los objetivos y valores de Renova Digital.',
+      activities: ['Definir roles y responsabilidades.', 'Seleccionar y vincular personal según necesidad.', 'Capacitar en técnicas de reacondicionamiento, atención y sistemas.', 'Evaluar desempeño y cumplimiento.', 'Promover seguridad, bienestar y buen ambiente laboral.'],
+      responsible: 'Administrador general / Responsable administrativo.',
+      inputs: ['Necesidades del negocio.', 'Perfiles de cargo.', 'Resultados de desempeño.'],
+      outputs: ['Equipo organizado.', 'Capacitaciones realizadas.', 'Evaluaciones y planes de mejora.'],
+      kpis: ['Cumplimiento de capacitaciones', 'Evaluación de desempeño', 'Rotación de personal', 'Incidentes laborales'],
+      related: ['g4', 'v3', 'v6', 'v8'],
+      importance: 'El conocimiento técnico y comercial del equipo impacta directamente la calidad del producto y la experiencia del cliente.'
+    },
+    a4: {
+      macro: 'Procesos Habilitantes o de Apoyo', code: 'A4', name: 'Gestión tecnológica y sistemas de información',
+      description: 'Administra las herramientas digitales que soportan la operación, ventas, inventario y datos de la empresa.',
+      objective: 'Garantizar que la web, CRM, ERP y datos operen de forma segura, disponible y confiable.',
+      activities: ['Administrar la página web y el sistema interno.', 'Gestionar CRM, ERP y base de datos.', 'Controlar usuarios, accesos y permisos.', 'Realizar respaldos y mantenimiento básico.', 'Asegurar integridad y seguridad de la información.', 'Dar soporte a incidencias tecnológicas.'],
+      responsible: 'Responsable de tecnología / Administrador general (con apoyo externo si aplica).',
+      inputs: ['Requerimientos de áreas.', 'Incidentes del sistema.', 'Políticas de seguridad.'],
+      outputs: ['Sistemas disponibles.', 'Respaldos y controles de acceso.', 'Datos confiables para operación y reportes.'],
+      kpis: ['Disponibilidad del sistema', 'Tiempo de resolución de incidentes', 'Cumplimiento de respaldos', 'Errores/incidencias de datos'],
+      related: ['v5', 'v6', 'a8', 'g4'],
+      importance: 'Sostiene la trazabilidad por serie, la gestión comercial y la información financiera necesaria para decidir.'
+    },
+    a5: {
+      macro: 'Procesos Habilitantes o de Apoyo', code: 'A5', name: 'Gestión de infraestructura y recursos físicos',
+      description: 'Provee y mantiene el espacio, herramientas y recursos físicos necesarios para reacondicionar y almacenar equipos.',
+      objective: 'Disponer de infraestructura adecuada y segura para la operación técnica y logística.',
+      activities: ['Administrar herramientas técnicas y equipos de trabajo.', 'Mantener instalaciones y estaciones de trabajo.', 'Organizar espacios de recepción, reacondicionamiento y almacenamiento.', 'Controlar recursos físicos y mobiliario.', 'Asegurar condiciones adecuadas de almacenamiento.'],
+      responsible: 'Responsable operativo / Administrador general.',
+      inputs: ['Necesidades operativas.', 'Inventario de activos físicos.', 'Plan de mantenimiento.'],
+      outputs: ['Infraestructura operativa.', 'Espacios organizados.', 'Recursos disponibles.'],
+      kpis: ['Disponibilidad de herramientas/equipos', 'Cumplimiento de mantenimiento', 'Incidentes por infraestructura', 'Orden/capacidad de almacenamiento'],
+      related: ['v2', 'v3', 'v5', 'a6'],
+      importance: 'Sin espacio y herramientas adecuadas, el reacondicionamiento y el control de inventario pierden eficiencia y calidad.'
+    },
+    a6: {
+      macro: 'Procesos Habilitantes o de Apoyo', code: 'A6', name: 'Gestión logística y soporte operativo',
+      description: 'Coordina la recepción, preparación y entrega de dispositivos para asegurar una operación ordenada.',
+      objective: 'Apoyar la recepción, almacenamiento y entrega de dispositivos de forma ordenada y segura.',
+      activities: ['Coordinar recepción y salida de equipos.', 'Preparar y proteger los dispositivos para entrega o retiro.', 'Apoyar la organización del inventario físico.', 'Coordinar entregas o retiros con el cliente.', 'Registrar movimientos y novedades de entrega.'],
+      responsible: 'Responsable logístico / Responsable operativo.',
+      inputs: ['Pedidos, compras y entregas programadas.', 'Materiales básicos de protección/embalaje.', 'Disponibilidad de inventario.'],
+      outputs: ['Entregas coordinadas.', 'Movimientos logísticos registrados.', 'Productos protegidos.'],
+      kpis: ['% de entregas a tiempo', 'Incidencias en entrega o retiro', 'Tiempo de preparación de pedido', 'Pedidos entregados con registro completo'],
+      related: ['v1', 'v5', 'v7', 'a5'],
+      importance: 'Asegura que los equipos se muevan de forma segura y puntual, reduciendo daños y retrasos.'
+    },
+    a7: {
+      macro: 'Procesos Habilitantes o de Apoyo', code: 'A7', name: 'Gestión legal y cumplimiento normativo',
+      description: 'Asegura que la operación comercial cumpla obligaciones legales, tributarias, de garantías y protección al consumidor.',
+      objective: 'Reducir riesgos legales y garantizar prácticas comerciales transparentes y conforme a la normativa.',
+      activities: ['Cumplir obligaciones legales y tributarias.', 'Definir y aplicar políticas de garantía, cambio y devolución.', 'Asegurar cumplimiento de normativa de protección al consumidor.', 'Revisar términos comerciales y documentación.', 'Gestionar soporte ante incidencias legales o reclamaciones.'],
+      responsible: 'Administrador general / Asesor externo legal o contable según necesidad.',
+      inputs: ['Normativa vigente.', 'Políticas comerciales.', 'Casos de reclamos/garantías.'],
+      outputs: ['Políticas actualizadas.', 'Cumplimiento normativo.', 'Reducción de riesgo legal.'],
+      kpis: ['Cumplimiento de obligaciones legales/tributarias', 'Reclamaciones legales recibidas', 'Actualización de políticas de garantía', 'Casos resueltos conforme a política'],
+      related: ['g3', 'v8', 'a1', 'a2'],
+      importance: 'Protege a la empresa y al cliente, especialmente en garantías, datos personales y condiciones comerciales.'
+    },
+    a8: {
+      macro: 'Procesos Habilitantes o de Apoyo', code: 'A8', name: 'Seguridad y gestión de información',
+      description: 'Protege los datos de clientes, la información empresarial y la información contenida en dispositivos recibidos.',
+      objective: 'Garantizar confidencialidad, integridad y disponibilidad de la información y el borrado seguro de datos.',
+      activities: ['Controlar permisos y accesos a sistemas.', 'Proteger datos de clientes y de la empresa.', 'Aplicar borrado seguro de datos en equipos recibidos.', 'Realizar respaldos y controles de seguridad.', 'Prevenir pérdida, alteración o acceso no autorizado.'],
+      responsible: 'Responsable de tecnología / Administrador general.',
+      inputs: ['Políticas de seguridad.', 'Usuarios y roles del sistema.', 'Dispositivos recibidos para reacondicionamiento.'],
+      outputs: ['Accesos controlados.', 'Datos protegidos.', 'Evidencia de borrado seguro.'],
+      kpis: ['% de equipos con borrado seguro verificado', 'Incidentes de seguridad', 'Cumplimiento de respaldos', 'Usuarios con permisos correctos'],
+      related: ['a4', 'v2', 'v3', 'g3', 'a7'],
+      importance: 'Es crítico para la confianza del cliente y para evitar riesgos por datos personales remanentes en dispositivos reacondicionados.'
+    }
+  };
+
+  const macroNames = {
+    g: 'Procesos de Gobierno', v: 'Procesos Agregadores de Valor', a: 'Procesos Habilitantes o de Apoyo'
+  };
+
+  const modal = document.getElementById('mgModal');
+  const modalTitle = document.getElementById('mgModalTitle');
+  const modalMacro = document.getElementById('mgModalMacro');
+  const modalBody = document.getElementById('mgModalBody');
+
+  function renderList(items) { return '<ul>' + items.map(i => '<li>' + escapeHtml(i) + '</li>').join('') + '</ul>'; }
+  function escapeHtml(s) { return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+  let lastFocus = null;
+  function openProcess(id) {
+    const p = processes[id];
+    if (!p) return;
+    lastFocus = document.activeElement;
+    modalMacro.textContent = p.macro + ' · ' + p.code;
+    modalTitle.textContent = p.name;
+    modalBody.innerHTML = `
+      <p class="mg-detail-desc">${escapeHtml(p.description)}</p>
+      <div class="mg-detail-grid">
+        <div class="mg-detail-box"><h3>Objetivo</h3><p>${escapeHtml(p.objective)}</p></div>
+        <div class="mg-detail-box"><h3>Responsable sugerido</h3><p>${escapeHtml(p.responsible)}</p></div>
+        <div class="mg-detail-box mg-detail-wide"><h3>Actividades principales</h3>${renderList(p.activities)}</div>
+        <div class="mg-detail-box"><h3>Entradas</h3>${renderList(p.inputs)}</div>
+        <div class="mg-detail-box"><h3>Resultados / Salidas</h3>${renderList(p.outputs)}</div>
+        <div class="mg-detail-box mg-detail-wide"><h3>Indicadores de gestión (KPI) propuestos</h3><div class="mg-kpis">${p.kpis.map(k=>`<span class="mg-kpi">${escapeHtml(k)}</span>`).join('')}</div></div>
+        <div class="mg-detail-box mg-detail-wide"><h3>Procesos relacionados</h3><div class="mg-related">${p.related.map(r=>{const rp=processes[r]; return rp?`<button type="button" class="mg-rel-btn" data-process="${r}">${escapeHtml(rp.code + ' - ' + rp.name)}</button>`:'';}).join('')}</div></div>
+        <div class="mg-detail-box mg-detail-wide"><h3>Importancia para Renova Digital</h3><p>${escapeHtml(p.importance)}</p></div>
+      </div>`;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    const closeBtn = modal.querySelector('.mg-close');
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+  }
+
+  const macros = {
+    gobierno: { name:'Procesos de Gobierno', code:'Nivel superior', color:'gov', description:'Establecen la dirección estratégica, definen objetivos, controlan resultados, gestionan riesgos y promueven la mejora continua de Renova Digital.', keys:['g1','g2','g3','g4','g5'] },
+    valor: { name:'Procesos Agregadores de Valor', code:'Nivel central', color:'val', description:'Conforman la cadena de valor que transforma dispositivos adquiridos en productos reacondicionados, comercializados y respaldados para el cliente.', keys:['v1','v2','v3','v4','v5','v6','v7','v8','v9'] },
+    apoyo: { name:'Procesos Habilitantes o de Apoyo', code:'Nivel inferior', color:'sup', description:'Proporcionan recursos humanos, financieros, tecnológicos, administrativos, logísticos, legales y de seguridad para habilitar la operación de Renova Digital.', keys:['a1','a2','a3','a4','a5','a6','a7','a8'] }
+  };
+
+  function openMacro(id) {
+    const m = macros[id];
+    if (!m) return;
+    lastFocus = document.activeElement;
+    modalMacro.textContent = m.code + ' · Macroproceso';
+    modalTitle.textContent = m.name;
+    const cards = m.keys.map(k => { const p = processes[k]; if(!p) return ''; return `
+      <div class="mg-detail-box mg-detail-wide">
+        <h3>${escapeHtml(p.code + ' - ' + p.name)}</h3>
+        <p style="margin-bottom:8px">${escapeHtml(p.description)}</p>
+        <p><strong>Objetivo:</strong> ${escapeHtml(p.objective)}</p>
+        <p><strong>Responsable:</strong> ${escapeHtml(p.responsible)}</p>
+        <div style="margin-top:8px"><button type="button" class="mg-rel-btn" data-process="${k}">Abrir ficha completa</button></div>
+      </div>`; }).join('');
+    modalBody.innerHTML = `
+      <p class="mg-detail-desc">${escapeHtml(m.description)}</p>
+      <div class="mg-detail-grid">${cards}</div>`;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    const closeBtn = modal.querySelector('.mg-close');
+    if (closeBtn) closeBtn.focus();
+  }
+
+  document.addEventListener('click', function (e) {
+    const macroBtn = e.target.closest('[data-macro]');
+    if (macroBtn) { e.preventDefault(); openMacro(macroBtn.getAttribute('data-macro')); return; }
+    const jumpBtn = e.target.closest('[data-jump]');
+    if (jumpBtn) { e.preventDefault(); openProcess(jumpBtn.getAttribute('data-jump')); return; }
+    const procBtn = e.target.closest('[data-process]');
+    if (procBtn) { e.preventDefault(); openProcess(procBtn.getAttribute('data-process')); return; }
+    if (e.target.closest('[data-mg-close]')) { closeModal(); return; }
+    const bandToggle = e.target.closest('[data-toggle-band]');
+    if (bandToggle) {
+      const band = bandToggle.closest('.mg-band');
+      const expanded = bandToggle.getAttribute('aria-expanded') === 'true';
+      bandToggle.setAttribute('aria-expanded', String(!expanded));
+      band.classList.toggle('collapsed', expanded);
+    }
+    const expandBtn = e.target.closest('[data-mg-expand]');
+    if (expandBtn) {
+      const mode = expandBtn.getAttribute('data-mg-expand');
+      document.querySelectorAll('.mg-band').forEach(b => {
+        const t = b.querySelector('[data-toggle-band]');
+        const collapse = mode === 'none';
+        b.classList.toggle('collapsed', collapse);
+        if (t) t.setAttribute('aria-expanded', String(!collapse));
+      });
+    }
+  });
+
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+})();
+
+
+
+
+</script></body></html>
